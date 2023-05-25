@@ -1,0 +1,15 @@
+.header {
+  font-family: Inter, Arial, sans-serif;
+  min-width: 320px;
+  width: 100%;
+  min-height: 74px;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 544px) {
+  .header {
+    min-height: 56px;
+  }
+}

@@ -1,0 +1,19 @@
+.content {
+  display: grid;
+  row-gap: 51px;
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 896px) {
+  .content {
+    padding-left: 19px;
+    padding-right: 19px;
+    row-gap: 42px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .content {
+    row-gap: 36px;
+  }
+}

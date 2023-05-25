@@ -1,0 +1,9 @@
+.sign {
+  font-family: Inter, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+}

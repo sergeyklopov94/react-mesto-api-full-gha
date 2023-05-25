@@ -1,0 +1,9 @@
+.sign__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 358px;
+  width: 100%;
+  min-height: calc(100vh - 125px);
+  padding: 60px 0 80px;
+}

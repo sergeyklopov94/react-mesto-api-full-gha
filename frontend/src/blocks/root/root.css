@@ -1,0 +1,31 @@
+.root {
+  background-color: #000;
+  color: #fff;
+  max-width: 880px;
+  min-width: 320px;
+  min-height: calc(100vh - 105px);
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 45px 0 60px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}
+
+@media screen and (max-width: 896px) {
+  .root {
+    padding-top: 36px;
+    padding-bottom: 48px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .root {
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+}

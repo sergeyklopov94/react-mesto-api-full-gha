@@ -1,0 +1,14 @@
+.navigation__link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  margin: 6px 0 0;
+  transition: .4s ease;
+  cursor: pointer;
+}
+
+.navigation__link:hover {
+    opacity: .6;
+  }

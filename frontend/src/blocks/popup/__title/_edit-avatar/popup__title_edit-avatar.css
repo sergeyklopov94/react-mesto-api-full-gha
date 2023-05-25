@@ -1,0 +1,9 @@
+.popup__title_edit-avatar {
+  padding-bottom: 43px;
+}
+
+@media screen and (max-width: 416px) {
+  .popup__title_edit-avatar {
+    padding-bottom: 56px;
+  }
+}

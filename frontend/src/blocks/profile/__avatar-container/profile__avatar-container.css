@@ -1,0 +1,8 @@
+.profile__avatar-container {
+  height: 100%;
+  max-width: 120px;
+  background-color: #000;
+  background-image: url("../../../images/profile-avatar-edit-button.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
