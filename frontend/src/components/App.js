@@ -94,8 +94,8 @@ function App() {
     });
   }
 
-  function handleUpdateUser(data) {
-    api.editUserInfo(data)
+  function handleUpdateUser({ name, about }) {
+    api.editUserInfo({ name, about })
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
@@ -105,8 +105,8 @@ function App() {
       });
   }
 
-  function handleUpdateAvatar(data) {
-    api.editUserAvatar(data)
+  function handleUpdateAvatar({ avatar }) {
+    api.editUserAvatar({ avatar })
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
@@ -132,11 +132,11 @@ function App() {
     let infoTooltipImage = null;
     auth.authorize(email, password)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
+        if (res) {
           setFormValue({email: '', password: ''});
-          setLoggedIn(true);
           navigate('/', {replace: true});
+          setEmail(email);
+          setLoggedIn(true);
           infoTooltipText = 'Вы успешно вошли!';
           infoTooltipImage = successIcon;
         }
@@ -150,6 +150,17 @@ function App() {
         setInfoTooltipData({image: infoTooltipImage, text: infoTooltipText});
         setIsInfoTooltipOpen(true);
       });
+  }
+
+  function handleLogout() {
+    auth.logout()
+      .then((res) => {
+        setLoggedIn(false);
+        setEmail('');
+      })
+      .catch((err) => { 
+        console.log(err);
+    });
   }
 
   function handleRegister(formValue) {
@@ -174,23 +185,18 @@ function App() {
   }
 
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      auth.checkToken(token)
-        .then((res) => {
-          if (res) {
-            setEmail(res.data.email);
-            setLoggedIn(true);
-            navigate('/', { replace: true });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-        setEmail('');
-    }
-  }, [navigate]);
+    auth.checkToken()
+      .then((res) => {
+        if (res) {
+          setEmail(res.email);
+          setLoggedIn(true);
+          navigate('/', { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   React.useEffect(() => {
     if(loggedIn) {
@@ -208,7 +214,9 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root" id="root">
-        <Header email={email} />
+        <Header 
+          email={email} 
+          onLogout={handleLogout}/>
         <Routes>
           <Route path="/sign-up" element={
             <Register handleRegister={handleRegister} />} />

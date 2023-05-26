@@ -8,7 +8,7 @@ const ConflictError = require('../errors/conflict-err');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -18,14 +18,14 @@ module.exports.getUserById = (req, res, next) => {
       if (!user) {
         throw new DataNotFoundError('Пользователь по указанному _id не найден');
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch(next);
 };
 
 module.exports.getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -72,7 +72,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         throw new DataNotFoundError('Такого пользователя не существует');
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -94,10 +94,11 @@ module.exports.updateAvatar = (req, res, next) => {
     },
   )
     .then((user) => {
+      console.log(user);
       if (!user) {
         throw new UncorrectDataError('Такого пользователя не существует');
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -120,9 +121,17 @@ module.exports.login = (req, res, next) => {
       res.cookie('jwt', token, {
         maxAge: 3600000,
         httpOnly: true,
-        //sameSite: true,
+        sameSite: true,
       });
       res.send({ token });
     })
     .catch(next);
+};
+
+module.exports.logout = (req, res, next) => {
+  try {
+    res.clearCookie('jwt').send({ message: 'Вы разлогинились' });
+  } catch(err) {
+    next(err);
+  };
 };

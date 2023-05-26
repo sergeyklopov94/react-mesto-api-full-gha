@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://localhost:3001';
+export const BASE_URL = 'http://localhost:3001';
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -7,6 +7,7 @@ export const register = (password, email) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify({password, email})
   })
   .then((res) => {
@@ -23,6 +24,7 @@ export const authorize = (email, password) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({email, password})
     })
     .then((res) => {
@@ -32,18 +34,35 @@ export const authorize = (email, password) => {
     });
   };
 
-  export const checkToken = (token) => {
+  export const checkToken = () => {
     return fetch(`${BASE_URL}/users/me`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        // 'Authorization': `Bearer ${token}`
+      },
+      credentials: 'include',
     })
     .then((res) => {
       if (res.ok) 
         return res.json();
       return Promise.reject(res.status);
+    });
+  };
+
+  export const logout = () => {
+    return fetch(`${BASE_URL}/signout`, {
+      method: "GET",
+      credentials: 'include',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      })
+      .then((res) => {
+        if (res.ok) 
+          return res.json();
+        return Promise.reject(res.status);
     });
   };

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { login, createUser } = require('./controllers/users');
+const { login, createUser, logout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { createUserValidation, loginValidation } = require('./middlewares/userValidation');
 const cors = require('./middlewares/cors');
@@ -31,6 +31,7 @@ app.use(requestLogger);
 
 app.post('/signin', loginValidation, login);
 app.post('/signup', createUserValidation, createUser);
+app.get('/signout', logout);
 
 app.use(auth);
 

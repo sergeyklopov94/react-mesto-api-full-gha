@@ -18,6 +18,8 @@ function Card({card, onCardClick, onCardDelete, onCardLike}) {
   }
 
   function handleLikeClick() {
+    console.log("currentUser " + currentUser);
+    console.log("isLiked " + isLiked);
     onCardLike(card);
   }
 

@@ -7,7 +7,7 @@ const ForbiddenError = require('../errors/forbidden-err');
 module.exports.getCards = (req, res, next) => {
   Card.find({})
     .populate(['owner', 'likes'])
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
@@ -15,7 +15,7 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((card) => card.populate('owner'))
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new UncorrectDataError('Переданы некорректные данные при создании карточки'));
@@ -55,7 +55,7 @@ module.exports.likeCard = (req, res, next) => {
       // eslint-disable-next-line max-len
       Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user._id } }, { new: true })
         .populate('owner')
-        .then((cardLike) => res.send({ data: cardLike }));
+        .then((cardLike) => res.send(cardLike));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -76,7 +76,7 @@ module.exports.dislikeCard = (req, res, next) => {
       }
       Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true })
         .populate('owner')
-        .then((cardDislike) => res.send({ data: cardDislike }));
+        .then((cardDislike) => res.send(cardDislike));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
