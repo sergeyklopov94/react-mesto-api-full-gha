@@ -105,7 +105,7 @@ export class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.sergklo94.nomoredomains.rocks',
   headers: {
     authorization: '553f0747-650c-4980-b831-611e9b7f89ca',
     'Content-Type': 'application/json'
