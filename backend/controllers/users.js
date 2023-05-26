@@ -123,15 +123,15 @@ module.exports.login = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
       });
-      res.send({ message: "Авторизация прошла успешно" });
+      res.send({ message: 'Авторизация прошла успешно' });
     })
     .catch(next);
 };
 
 module.exports.logout = (req, res, next) => {
   try {
-    res.clearCookie('jwt').send({ message: "Осуществлен выход с Вашего аккаунта" });
-  } catch(err) {
+    res.clearCookie('jwt').send({ message: 'Осуществлен выход с Вашего аккаунта' });
+  } catch (err) {
     next(err);
-  };
+  }
 };
