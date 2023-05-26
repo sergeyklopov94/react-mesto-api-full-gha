@@ -13,14 +13,20 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.options('*', cors({
-  origin: '*',
+const allowedCors = [
+  'https://sergklo94.nomoredomains.rocks/',
+  'http://sergklo94.nomoredomains.rocks',
+  'https://localhost:3000',
+  'http://localhost:3000',
+];
+
+const corsOptions = {
+  origin: allowedCors,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-}));
-app.use(cors({
-  origin: '*',
-  credentials: true,
-}));
+};
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
