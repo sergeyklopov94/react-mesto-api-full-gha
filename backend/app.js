@@ -22,7 +22,7 @@ const allowedCors = [
 ];
 
 const corsOptions = {
-  origin: allowedCors,
+  origin: 'https://sergklo94.nomoredomains.rocks/',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
