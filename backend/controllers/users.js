@@ -123,14 +123,14 @@ module.exports.login = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
       });
-      res.send({ token });
+      res.send({ message: "Авторизация прошла успешно" });
     })
     .catch(next);
 };
 
 module.exports.logout = (req, res, next) => {
   try {
-    res.clearCookie('jwt').send({ message: 'Вы разлогинились' });
+    res.clearCookie('jwt').send({ message: "Осуществлен выход с Вашего аккаунта" });
   } catch(err) {
     next(err);
   };

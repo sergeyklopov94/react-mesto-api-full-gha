@@ -54,7 +54,7 @@ module.exports.likeCard = (req, res, next) => {
       }
       // eslint-disable-next-line max-len
       Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user._id } }, { new: true })
-        .populate('owner')
+        .populate(['owner', 'likes'])
         .then((cardLike) => res.send(cardLike));
     })
     .catch((err) => {
@@ -75,7 +75,7 @@ module.exports.dislikeCard = (req, res, next) => {
         throw new DataNotFoundError('Карточка не существует');
       }
       Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true })
-        .populate('owner')
+        .populate(['owner', 'likes'])
         .then((cardDislike) => res.send(cardDislike));
     })
     .catch((err) => {

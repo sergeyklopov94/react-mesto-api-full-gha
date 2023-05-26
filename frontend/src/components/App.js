@@ -196,6 +196,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+      // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
@@ -203,7 +204,7 @@ function App() {
       Promise.all([api.getUserData(), api.getInitialCards()])
         .then(([userData, cardData]) => {
           setCurrentUser(userData);
-          setCards(cardData);
+          setCards(cardData.reverse());
         })
         .catch((err) => {
           console.log(err);
