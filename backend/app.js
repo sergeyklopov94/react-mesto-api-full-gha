@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { login, createUser, logout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { createUserValidation, loginValidation } = require('./middlewares/userValidation');
-let cors = require('cors');
 
 const { PORT = 3000 } = process.env;
 
