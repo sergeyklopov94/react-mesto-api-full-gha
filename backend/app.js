@@ -7,13 +7,20 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { login, createUser, logout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { createUserValidation, loginValidation } = require('./middlewares/userValidation');
-const cors = require('./middlewares/cors');
+let cors = require('cors');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(cors);
+app.options('*', cors({
+  origin: '*',
+  credentials: true,
+}));
+app.use(cors({
+  origin: '*',
+  credentials: true,
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
