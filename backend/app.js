@@ -14,15 +14,8 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-const allowedCors = [
-  'https://sergklo94.nomoredomains.rocks/',
-  'http://sergklo94.nomoredomains.rocks',
-  'https://localhost:3000',
-  'http://localhost:3000',
-];
-
 const corsOptions = {
-  origin: allowedCors,
+  origin: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
