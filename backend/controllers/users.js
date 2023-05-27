@@ -100,7 +100,7 @@ module.exports.updateAvatar = (req, res, next) => {
     .then((user) => {
       console.log(user);
       if (!user) {
-        throw new UncorrectDataError('Такого пользователя не существует');
+        throw new DataNotFoundError('Такого пользователя не существует');
       }
       res.send(user);
     })
